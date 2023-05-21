@@ -16,7 +16,8 @@ namespace ariel
     
     private:
     Character *leader;
-    vector <Character> team;
+    vector <Character*> team;
+    int size;
 
     public:
     Team(Character *leader);

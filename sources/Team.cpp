@@ -10,16 +10,26 @@ namespace ariel
 
     Team::~Team()
     {
-        
+        // Deallocate memory for each character in the vector
+        for (Character* character : team)
+        {
+            delete character;
+        }
+
+        // Clear the vector
+        team.clear();
     }
 
     void Team::add(Character *character)
     {
-
+        if(character)
+        {
+            team.push_back(character);
+        }
     }
+
     void Team::attack(Team *enemy)
     {
-
     }
     int Team::stillAlive()
     {
@@ -27,7 +37,6 @@ namespace ariel
     }
     void Team::print()
     {
-
     }
-    
+
 }
