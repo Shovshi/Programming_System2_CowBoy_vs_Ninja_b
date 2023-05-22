@@ -11,11 +11,12 @@ namespace ariel
     Point location;
     int _hit;
     std:: string name;
+    char type;
 
     public:
     
     // Constructors
-    Character(Point location , int hit , std::string name);
+    Character(Point location , int hit , std::string name, char type);
     Character(Character &other);
     Character();
 
@@ -29,6 +30,6 @@ namespace ariel
     std::string print();
     void setHit(int num);
     int getHit();
-
+    char getType();
     };
 }

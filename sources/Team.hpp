@@ -26,6 +26,8 @@ namespace ariel
     void attack(Team *enemy);
     int stillAlive();
     void print();
+    void setLeader(Character *character);
+    Character* closest_player(Character *player);
 
     };
 }

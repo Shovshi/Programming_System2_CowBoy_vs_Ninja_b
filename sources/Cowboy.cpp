@@ -4,7 +4,7 @@
 
 namespace ariel
 {
-    Cowboy::Cowboy(std::string name , Point location): Character(location , 110 , name)
+    Cowboy::Cowboy(std::string name , Point location): Character(location , 110 , name , 'C')
     {
         this->ballsNum = 6;
     } 

@@ -19,9 +19,8 @@ namespace ariel
     void shoot(Character *enemy);
     bool hasboolets();
     void reload();
-    char getType();
+    virtual char getType();
     int getBallsNum();
     std::string print();
-
     };
 }

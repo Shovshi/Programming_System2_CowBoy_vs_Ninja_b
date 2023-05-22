@@ -1,15 +1,18 @@
 #include "Character.hpp"
+#include "Team.hpp"
+#include <vector>
 #include <cmath>
 
 namespace ariel
 {
 
     // Constructors
-    Character::Character(Point location , int hit , std::string name)
+    Character::Character(Point location, int hit, std::string name, char type)
     {
         this->location = location;
         this->_hit = hit;
         this->name = name;
+        this->type = type;
     }
 
     Character::Character(Character &other)
@@ -24,8 +27,13 @@ namespace ariel
     }
 
     // Class functions
+    char Character::getType()
+    {
+        return type;
+    }
+
     std::string Character::print()
-    {            
+    {
         std::string output = "Character Details:\n";
         if (_hit > 0)
         {
@@ -55,18 +63,18 @@ namespace ariel
     {
         double dx = location.getX() - other.getLocation().getX();
         double dy = location.getY() - other.getLocation().getY();
-        return std::sqrt(dx*dx + dy*dy);
+        return std::sqrt(dx * dx + dy * dy);
     }
 
     void Character::hit(int num)
     {
         if (num > _hit)
         {
-            _hit  = 0;
+            _hit = 0;
         }
         _hit = _hit - num;
     }
-    
+
     std::string Character::getName()
     {
         return name;
@@ -81,7 +89,6 @@ namespace ariel
         location = curr;
     }
 
-
     void Character::setHit(int num)
     {
         _hit = num;
@@ -92,7 +99,4 @@ namespace ariel
         return _hit;
     }
 
-
-
 }
-    
