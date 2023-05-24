@@ -56,7 +56,7 @@ namespace ariel
         {
             if (teammate->isAlive())
             {
-                double distance = curr_player->distance(*teammate);
+                double distance = curr_player->distance(teammate);
                 if (distance < minDistance)
                 {
                     minDistance = distance;
@@ -75,19 +75,19 @@ namespace ariel
 
     void Team::attack(Team *enemy)
     {
-        if (!enemy->leader)
+        if (!leader->isAlive())
         {
-            Character *new_leader = closest_player(enemy->leader);
-            enemy->setLeader(new_leader);
+            Character *new_leader = closest_player(this->leader);
+            this->setLeader(new_leader);
         }
-        Character *victim = closest_player(leader);
 
         for (Character *teammate : team)
         {
+            Character *victim = closest_player(leader);
             if (teammate->getType() == 'C')
             {
                 Cowboy *cow_boy = static_cast<Cowboy*>(teammate);
-                if (cow_boy->hasboolets())
+                if (cow_boy->hasboolets() && victim->isAlive())
                 {
                     cow_boy->shoot(victim);
                 }
@@ -99,13 +99,13 @@ namespace ariel
             if (teammate->getType() == 'N')
             {
                 Ninja *ninja = static_cast<Ninja*>(teammate);
-                if (ninja)
+                if (ninja->distance(victim) <= 1)
                 {
-                    
+                    ninja->slash(victim);
                 }
                 else
                 {
-                    
+                    ninja->move(victim);
                 }
             }
             

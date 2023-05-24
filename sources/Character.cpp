@@ -59,10 +59,10 @@ namespace ariel
         return false;
     }
 
-    double Character::distance(Character &other)
+    double Character::distance(Character *other)
     {
-        double dx = location.getX() - other.getLocation().getX();
-        double dy = location.getY() - other.getLocation().getY();
+        double dx = location.getX() - other->getLocation().getX();
+        double dy = location.getY() - other->getLocation().getY();
         return std::sqrt(dx * dx + dy * dy);
     }
 

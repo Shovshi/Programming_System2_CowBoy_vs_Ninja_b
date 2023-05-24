@@ -22,7 +22,7 @@ namespace ariel
 
     // Class functions
     bool isAlive();
-    double distance(Character &other);
+    double distance(Character *other);
     void hit(int num);
     std::string getName();
     Point getLocation();

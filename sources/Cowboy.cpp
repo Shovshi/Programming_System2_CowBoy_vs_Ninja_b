@@ -20,7 +20,7 @@ namespace ariel
     void Cowboy::shoot(Character *enemy)
     {
         int enemyHit = enemy->getHit();
-        if (isAlive && hasboolets)
+        if (isAlive() && hasboolets())
         {          
             ballsNum -=1; 
             enemyHit = enemyHit -10;
