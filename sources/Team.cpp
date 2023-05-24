@@ -81,7 +81,7 @@ namespace ariel
     }
     Character *Team::closest_player_alive(Team *enemy)
     {
-        Character *closestPlayerAlive;
+        Character *closestPlayerAlive = nullptr;
         double minDistance = std::numeric_limits<double>::max();
 
         for (size_t i = 0; i < enemy->team.size(); i++)
@@ -114,9 +114,13 @@ namespace ariel
         if (!leader->isAlive())
         {
             Character *new_leader = closest_player(this);
+            if(new_leader == nullptr)
+            {
+                cout << "Enemy Team Defeated "<<endl;
+                return;
+            }
             this->setLeader(new_leader);
         }
-
         for (Character *teammate : team)
         {
             Character *victim = closest_player_alive(enemy);
@@ -127,7 +131,7 @@ namespace ariel
             if (teammate->getType() == 'C')
             {
                 Cowboy *cow_boy = dynamic_cast<Cowboy *>(teammate);
-                if (!cow_boy->hasboolets())
+                if (cow_boy->isAlive() && !cow_boy->hasboolets())
                 {
                     cow_boy->reload();
                 }
@@ -140,6 +144,11 @@ namespace ariel
         for (Character *teammate : team)
         {
             Character *victim = closest_player_alive(enemy);
+            if(victim == nullptr)
+            {
+                cout <<"Enemy Team Defeated" <<endl;
+                return;
+            }
             if (teammate->getType() == 'N')
             {
                 Ninja *ninja = dynamic_cast<Ninja *>(teammate);

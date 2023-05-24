@@ -24,12 +24,22 @@ namespace ariel
         {
             throw std::runtime_error("The enemy is already dead");
         }
+        
+        if(leader == nullptr)
+        {
+            throw std::runtime_error("Leader is null");
+        }
         if (!leader->isAlive())
         {
+            
             Character *new_leader = closest_player(this);
+            if(new_leader == nullptr)
+            {
+                cout << " No Enemy Found " << endl;
+                return;
+            }
             this->setLeader(new_leader);
-        }
-
+        }            
         for (Character *teammate : team)
         {
             Character *victim = closest_player_alive(enemy);
@@ -37,18 +47,19 @@ namespace ariel
             {
                 return;
             }
-            if (teammate->getType() == 'C')
+           if (teammate->getType() == 'C')
             {
                 Cowboy *cow_boy = dynamic_cast<Cowboy *>(teammate);
-                if (cow_boy->hasboolets() && victim->isAlive() && cow_boy->isAlive())
-                {
-                    cow_boy->shoot(victim);
-                }
-                else
+                if (cow_boy->isAlive() && !cow_boy->hasboolets())
                 {
                     cow_boy->reload();
                 }
+                else if (cow_boy->isAlive() && victim->isAlive())
+                {
+                    cow_boy->shoot(victim);
+                }
             }
+
             if (teammate->getType() == 'N')
             {
                 Ninja *ninja = dynamic_cast<Ninja *>(teammate);

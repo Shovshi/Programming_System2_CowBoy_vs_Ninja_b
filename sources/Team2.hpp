@@ -16,7 +16,6 @@ namespace ariel
     class Team2 : public Team{
     
     private:
-    Character *leader;
     vector <Character> team2;
 
     public:

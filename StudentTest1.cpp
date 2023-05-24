@@ -515,8 +515,8 @@ TEST_SUITE("Battle simulations")
         team2.add(cowboy3);
 
         CHECK_EQ(team2.stillAlive(), 7);
+        multi_attack(2, team, team2);        
 
-        multi_attack(2, team, team2);
         CHECK_FALSE(young_ninja->isAlive()); // Young ninja should be dead
         CHECK((trained_ninja->isAlive() && old_ninja->isAlive() &&
                young_ninja2->isAlive())); // Everyone else should still be alive
@@ -526,17 +526,18 @@ TEST_SUITE("Battle simulations")
                young_ninja2->isAlive())); // No one should die in the attack
 
         multi_attack(2, team, team2);
+
         CHECK_FALSE(trained_ninja->isAlive()); // Trained ninja should be dead
         CHECK((!old_ninja->isAlive() && young_ninja2->isAlive()));
 
         multi_attack(4, team, team2);
+        
         CHECK_FALSE(old_ninja->isAlive()); // Old ninja should be dead
         CHECK(!young_ninja2->isAlive());
 
         multi_attack(2, team, team2);
-
-        CHECK_NOTHROW(team.attack(
-            &team2));                                             // The entire enemy team will be dead before every cowboy shoots, the attack should stop and not throw an exception
+        CHECK_NOTHROW(team.attack(&team2)); 
+                                            // The entire enemy team will be dead before every cowboy shoots, the attack should stop and not throw an exception
         CHECK_FALSE(young_ninja2->isAlive());                     // Young ninja should be dead
         CHECK_THROWS_AS(team.attack(&team2), std::runtime_error); // Attacking a dead team should throw an exception
     }
@@ -557,7 +558,6 @@ TEST_SUITE("Battle simulations")
         auto team2_c3 = create_cowboy(3, 0); //
         auto team_c3 = create_cowboy(5, 0);  //
         auto team2_c4 = create_cowboy(-5, 0);
-
         Team team1{team_c1};
         team1.add(team_c2);
         team1.add(team_c3);
@@ -582,16 +582,17 @@ TEST_SUITE("Battle simulations")
             team_c1->shoot(team2_c3);
         }
         CHECK((!team2_c2->isAlive() && team2_c1->isAlive() && !team2_c3->isAlive() && team2_c4->isAlive()));
-
+        
+    
         // Next captain should be team2_c1, hence, the next enemy to be attacked by team2 should team_cc.
         multi_attack(7, team2, team1);
         CHECK((!team_c3->isAlive() && team_c1->isAlive() && !team_c2->isAlive()));
-
         while (team1.stillAlive() && team2.stillAlive())
-        {
+        { 
             team1.attack(&team2);
-            team2.attack(&team1);
+            team2.attack(&team1); 
         }
+      
     }
 
     // In this test the attacking team is again composed of cowboys, this is because cowboys are stationary, and we can better predict the damage done in every attack.

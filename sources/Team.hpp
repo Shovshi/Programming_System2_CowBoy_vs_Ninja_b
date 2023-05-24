@@ -15,7 +15,7 @@ namespace ariel
     class Team{
     
     private:
-    Character *leader;
+    
     int size;
 
     public:
@@ -29,7 +29,7 @@ namespace ariel
     void setLeader(Character *character);
     Character* closest_player(Team *enemy);
     Character* closest_player_alive(Team *enemy);
-
+    Character *leader;
 
     };
 }
