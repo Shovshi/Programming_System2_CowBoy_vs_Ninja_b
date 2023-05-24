@@ -24,6 +24,7 @@ namespace ariel
     void attack(Team *enemy);
     int stillAlive();
     void print();
+    Team* sort_enemy_team(Team* team);
 
     };
 }

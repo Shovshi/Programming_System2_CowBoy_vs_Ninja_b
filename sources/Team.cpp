@@ -33,7 +33,7 @@ namespace ariel
         // Clear the vector
         team.clear();
     }
-
+    Team::Team(){}
     void Team::setLeader(Character *character)
     {
         this->leader = character;

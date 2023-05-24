@@ -21,6 +21,7 @@ namespace ariel
     public:
     vector <Character*> team;
     Team(Character *leader);
+    Team();
     ~Team();
     void add(Character *character);
     void attack(Team *enemy);
