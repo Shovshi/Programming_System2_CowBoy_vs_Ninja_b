@@ -27,8 +27,8 @@ namespace ariel
 
     double Point::distance(Point other)
     {
-        double dx = x - other.x;
-        double dy = y - other.y;
+        double dx = other.getX()- x;
+        double dy = other.getY() - y;
         return std::sqrt(dx*dx + dy*dy);
     }
 
@@ -41,6 +41,10 @@ namespace ariel
 
     Point Point::moveTowards(Point source , Point dest , double dis)
     {
+        if (dis < 0)
+        {
+           throw std::invalid_argument("The distance is negative");
+        }
         double d = source.distance(dest);
         if (d <= dis)
         {
@@ -49,8 +53,8 @@ namespace ariel
         else
         {
             double ratio = dis / d;
-            double newX = x + ratio * (dest.x - x);
-            double newY = y + ratio * (dest.y - y);
+            double newX = source.getX() + ratio * (dest.getX() - source.getX());
+            double newY = source.getY() + ratio * (dest.getY() - source.getY());
             return Point(newX, newY);
         }
     }

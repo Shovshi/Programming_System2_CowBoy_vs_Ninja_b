@@ -7,12 +7,13 @@ namespace ariel
 {
 
     // Constructors
-    Character::Character(Point location, int hit, std::string name, char type)
+    Character::Character(Point location, int hit, std::string name, char type , bool isPlaying)
     {
         this->location = location;
         this->_hit = hit;
         this->name = name;
         this->type = type;
+        this->isPlaying = isPlaying;
     }
 
     Character::Character(Character &other)
@@ -26,7 +27,21 @@ namespace ariel
     {
     }
 
+    Character::~Character()
+    {
+    }
+
     // Class functions
+    bool Character::getIsPLaying()
+    {
+        return isPlaying;
+    }
+
+    void Character::setIsPlaying(bool val)
+    {
+        this->isPlaying = val;
+    }
+
     char Character::getType()
     {
         return type;
@@ -52,7 +67,7 @@ namespace ariel
 
     bool Character::isAlive()
     {
-        if (_hit > 0)
+        if (this->getHit() > 0)
         {
             return true;
         }
@@ -61,18 +76,20 @@ namespace ariel
 
     double Character::distance(Character *other)
     {
-        double dx = location.getX() - other->getLocation().getX();
-        double dy = location.getY() - other->getLocation().getY();
-        return std::sqrt(dx * dx + dy * dy);
+        return location.distance(other->getLocation());
     }
 
     void Character::hit(int num)
     {
+        if(num < 0)
+        {
+            throw std::invalid_argument("The hit number is negative");
+        }
         if (num > _hit)
         {
-            _hit = 0;
+             this->setHit(0);
         }
-        _hit = _hit - num;
+        this->setHit(this->getHit()-num);
     }
 
     std::string Character::getName()

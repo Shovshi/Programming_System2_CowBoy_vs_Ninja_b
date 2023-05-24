@@ -16,7 +16,7 @@ namespace ariel
     Point();
     double distance(Point other);
     std::string print();
-    Point moveTowards(Point source , Point dest , double dis);
+    static Point moveTowards(Point source , Point dest , double dis);
     double getX();
     double getY();
     };

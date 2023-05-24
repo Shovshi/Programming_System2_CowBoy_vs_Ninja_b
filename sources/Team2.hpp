@@ -8,11 +8,12 @@
 #include "OldNinja.hpp"
 #include "TrainedNinja.hpp"
 #include <vector>
+#include "Team.hpp"
 using namespace std;
 
 namespace ariel
 {
-    class Team2{
+    class Team2 : public Team{
     
     private:
     Character *leader;
@@ -21,8 +22,7 @@ namespace ariel
     public:
     Team2(Character *leader);
     ~Team2();
-    void add(Character *character);
-    void attack(Team2 *enemy);
+    void attack(Team *enemy);
     int stillAlive();
     void print();
 

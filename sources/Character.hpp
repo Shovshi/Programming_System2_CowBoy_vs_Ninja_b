@@ -12,14 +12,16 @@ namespace ariel
     int _hit;
     std:: string name;
     char type;
+    bool isPlaying;
 
     public:
     
     // Constructors
-    Character(Point location , int hit , std::string name, char type);
+    Character(Point location , int hit , std::string name, char type , bool isPlaying);
     Character(Character &other);
     Character();
-
+    ~Character();
+    
     // Class functions
     bool isAlive();
     double distance(Character *other);
@@ -27,9 +29,11 @@ namespace ariel
     std::string getName();
     Point getLocation();
     void setLocation(Point curr);
-    std::string print();
+    virtual std::string print();
     void setHit(int num);
     int getHit();
     char getType();
+    bool getIsPLaying();
+    void setIsPlaying(bool val);
     };
 }

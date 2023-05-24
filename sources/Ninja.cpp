@@ -4,18 +4,18 @@
 
 namespace ariel
 {
-    Ninja::Ninja(std::string name, Point location, int _hit, int speed) : Character(location, _hit, name , 'N'), speed(speed)
+    Ninja::Ninja(std::string name, Point location, int _hit, int speed) : Character(location, _hit, name, 'N', false), speed(speed)
     {
     }
 
-    Ninja::Ninja(Ninja &other) : Character(other) , speed(other.getSpeed()) , type(other.type)
+    Ninja::Ninja(Ninja &other) : Character(other), speed(other.getSpeed()), type(other.type)
     {
     }
 
     void Ninja::move(Character *target)
     {
         if (!isAlive())
-            return;
+            std::runtime_error("Player is not alive");
 
         int toMove = speed;
         Point source_location = getLocation();
@@ -43,10 +43,26 @@ namespace ariel
 
     void Ninja::slash(Character *target)
     {
-        if(isAlive && getLocation().distance(target->getLocation()) < 1)
-        {            
+        if (target == nullptr)
+        {
+            throw std::runtime_error("The target is null");
+        }
+        if (!target->isAlive())
+        {
+            throw std::runtime_error("The target is dead");
+        }
+        if (!this->isAlive())
+        {
+            throw std::runtime_error("The player is dead");
+        }
+        if (this == target)
+        {
+            throw std::runtime_error("No self harm");
+        }
+        if (isAlive() && getLocation().distance(target->getLocation()) < 1)
+        {
             int curr = target->getHit();
-            if(curr - 40 < 0)
+            if (curr - 40 < 0)
             {
                 target->setHit(0);
             }

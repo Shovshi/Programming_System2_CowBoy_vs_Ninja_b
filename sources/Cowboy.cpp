@@ -4,10 +4,10 @@
 
 namespace ariel
 {
-    Cowboy::Cowboy(std::string name , Point location): Character(location , 110 , name , 'C')
+    Cowboy::Cowboy(std::string name, Point location) : Character(location, 110, name, 'C', false)
     {
         this->ballsNum = 6;
-    } 
+    }
 
     Cowboy::Cowboy()
     {
@@ -19,11 +19,27 @@ namespace ariel
 
     void Cowboy::shoot(Character *enemy)
     {
+        if (enemy == nullptr)
+        {
+            throw std::runtime_error("The enemy is null");
+        }
+        if (!enemy->isAlive())
+        {
+            throw std::runtime_error("The enemy is dead");
+        }
+        if (!this->isAlive())
+        {
+            throw std::runtime_error("This player is dead");
+        }
+        if (this == enemy)
+        {
+            throw std::runtime_error("No self harm");
+        }
         int enemyHit = enemy->getHit();
         if (isAlive() && hasboolets())
-        {          
-            ballsNum -=1; 
-            enemyHit = enemyHit -10;
+        {
+            ballsNum -= 1;
+            enemyHit -= 10;
             if (enemyHit < 0)
             {
                 enemy->setHit(0);
@@ -43,7 +59,11 @@ namespace ariel
 
     void Cowboy::reload()
     {
-        ballsNum += 6;
+        if (!this->isAlive())
+        {
+            throw std::runtime_error("The player is dead");
+        }
+        ballsNum = 6;
     }
 
     int Cowboy::getBallsNum()

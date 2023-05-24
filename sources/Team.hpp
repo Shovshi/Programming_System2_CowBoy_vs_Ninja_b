@@ -16,10 +16,10 @@ namespace ariel
     
     private:
     Character *leader;
-    vector <Character*> team;
     int size;
 
     public:
+    vector <Character*> team;
     Team(Character *leader);
     ~Team();
     void add(Character *character);
@@ -27,7 +27,9 @@ namespace ariel
     int stillAlive();
     void print();
     void setLeader(Character *character);
-    Character* closest_player(Character *player);
+    Character* closest_player(Team *enemy);
+    Character* closest_player_alive(Team *enemy);
+
 
     };
 }
